@@ -124,21 +124,13 @@
   <div class="page">
     <header>
       <h1>CY-Bench dashboards</h1>
-      <p class="lead">Click a country on the map to open walk-forward dashboards. Colors reflect the selected forecast horizon.</p>
+      <p class="lead">Click a country on the map to open mid-season and end-of-season walk-forward dashboards.</p>
     </header>
 
     <div class="top-links" id="top-links"></div>
 
     <div class="layout">
       <div class="card">
-        <div class="toolbar">
-          <span class="muted">Horizon</span>
-          <button type="button" data-horizon="all" class="active">All</button>
-          <button type="button" data-horizon="early">Early season (~25%)</button>
-          <button type="button" data-horizon="mid">Mid-season (~50%)</button>
-          <button type="button" data-horizon="qtr">Late season (~75%)</button>
-          <button type="button" data-horizon="eos">End of season</button>
-        </div>
         <div id="map-wrap"><p class="muted">Loading map…</p></div>
         <div class="legend muted">
           <span><i class="swatch" style="background:var(--land-available)"></i> Dashboard available</span>
@@ -156,26 +148,26 @@
     const DATA = {"countries": [{"cc": "AO", "map_cc": "AO", "name": "Angola", "eos": "ao_walk_forward_eos_v4/dashboard.html", "mid": "ao_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "AR", "map_cc": "AR", "name": "Argentina", "eos": "ar_walk_forward_eos_v4/dashboard.html", "mid": "ar_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "AU", "map_cc": "AU", "name": "Australia", "eos": "au_walk_forward_eos_v4/dashboard.html", "mid": "au_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "AT", "map_cc": "AT", "name": "Austria", "eos": "at_walk_forward_eos_v4/dashboard.html", "mid": "at_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "BE", "map_cc": "BE", "name": "Belgium", "eos": "be_walk_forward_eos_v4/dashboard.html", "mid": "be_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "BR", "map_cc": "BR", "name": "Brazil", "eos": "br_walk_forward_eos_v4/dashboard.html", "mid": "br_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "BG", "map_cc": "BG", "name": "Bulgaria", "eos": "bg_walk_forward_eos_v4/dashboard.html", "mid": "bg_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "BF", "map_cc": "BF", "name": "Burkina Faso", "eos": "bf_walk_forward_eos_v4/dashboard.html", "mid": "bf_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "TD", "map_cc": "TD", "name": "Chad", "eos": "td_walk_forward_eos_v4/dashboard.html", "mid": "td_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "CN", "map_cc": "CN", "name": "China", "eos": "cn_walk_forward_eos_v4/dashboard.html", "mid": "cn_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "HR", "map_cc": "HR", "name": "Croatia", "eos": "hr_walk_forward_eos_v4/dashboard.html", "mid": "hr_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "CZ", "map_cc": "CZ", "name": "Czechia", "eos": "cz_walk_forward_eos_v4/dashboard.html", "mid": "cz_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "DK", "map_cc": "DK", "name": "Denmark", "eos": "dk_walk_forward_eos_v4/dashboard.html", "mid": "dk_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "EE", "map_cc": "EE", "name": "Estonia", "eos": "ee_walk_forward_eos_v4/dashboard.html", "mid": "ee_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "ET", "map_cc": "ET", "name": "Ethiopia", "eos": "et_walk_forward_eos_v4/dashboard.html", "mid": "et_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "FI", "map_cc": "FI", "name": "Finland", "eos": "fi_walk_forward_eos_v4/dashboard.html", "mid": "fi_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "FR", "map_cc": "FR", "name": "France", "eos": "fr_walk_forward_eos_v4/dashboard.html", "mid": "fr_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "DE", "map_cc": "DE", "name": "Germany", "eos": "de_walk_forward_eos_v4/dashboard.html", "mid": "de_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "EL", "map_cc": "GR", "name": "Greece", "eos": "el_walk_forward_eos_v4/dashboard.html", "mid": "el_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "HU", "map_cc": "HU", "name": "Hungary", "eos": "hu_walk_forward_eos_v4/dashboard.html", "mid": "hu_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "IN", "map_cc": "IN", "name": "India", "eos": "in_walk_forward_eos_v4/dashboard.html", "mid": "in_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "IT", "map_cc": "IT", "name": "Italy", "eos": "it_walk_forward_eos_v4/dashboard.html", "mid": "it_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "LV", "map_cc": "LV", "name": "Latvia", "eos": "lv_walk_forward_eos_v4/dashboard.html", "mid": "lv_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "LS", "map_cc": "LS", "name": "Lesotho", "eos": "ls_walk_forward_eos_v4/dashboard.html", "mid": "ls_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "LT", "map_cc": "LT", "name": "Lithuania", "eos": "lt_walk_forward_eos_v4/dashboard.html", "mid": "lt_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "MG", "map_cc": "MG", "name": "Madagascar", "eos": "mg_walk_forward_eos_v4/dashboard.html", "mid": "mg_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "ML", "map_cc": "ML", "name": "Mali", "eos": "ml_walk_forward_eos_v4/dashboard.html", "mid": "ml_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "MZ", "map_cc": "MZ", "name": "Mozambique", "eos": "mz_walk_forward_eos_v4/dashboard.html", "mid": "mz_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "NL", "map_cc": "NL", "name": "Netherlands", "eos": "nl_walk_forward_eos_v4/dashboard.html", "mid": "nl_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "NE", "map_cc": "NE", "name": "Niger", "eos": "ne_walk_forward_eos_v4/dashboard.html", "mid": "ne_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "PL", "map_cc": "PL", "name": "Poland", "eos": "pl_walk_forward_eos_v4/dashboard.html", "mid": "pl_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "PT", "map_cc": "PT", "name": "Portugal", "eos": "pt_walk_forward_eos_v4/dashboard.html", "mid": "pt_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "RO", "map_cc": "RO", "name": "Romania", "eos": "ro_walk_forward_eos_v4/dashboard.html", "mid": "ro_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "SN", "map_cc": "SN", "name": "Senegal", "eos": "sn_walk_forward_eos_v4/dashboard.html", "mid": "sn_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "SK", "map_cc": "SK", "name": "Slovakia", "eos": "sk_walk_forward_eos_v4/dashboard.html", "mid": "sk_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "ZA", "map_cc": "ZA", "name": "South Africa", "eos": "za_walk_forward_eos_v4/dashboard.html", "mid": "za_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "ES", "map_cc": "ES", "name": "Spain", "eos": "es_walk_forward_eos_v4/dashboard.html", "mid": "es_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "SE", "map_cc": "SE", "name": "Sweden", "eos": "se_walk_forward_eos_v4/dashboard.html", "mid": "se_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "US", "map_cc": "US", "name": "United States", "eos": "us_walk_forward_eos_v4/dashboard.html", "mid": "us_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "ZM", "map_cc": "ZM", "name": "Zambia", "eos": "zm_walk_forward_eos_v4/dashboard.html", "mid": "zm_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}], "n_countries": 40, "has_insights": true, "has_screening": false, "screening_href": null, "geojson_href": "assets/world_countries.geojson"};
     const byCc = new Map(DATA.countries.map(c => [c.cc, c]));
     const byMapIso = new Map(DATA.countries.map(c => [c.map_cc || c.cc, c]));
-    let horizon = "all";
     let selectedCc = null;
 
     const topLinks = document.getElementById("top-links");
     if (DATA.has_insights) {
-      topLinks.innerHTML += `<a class="pill" href="insights.html">Global insights (all models)</a>`;
+      topLinks.innerHTML += `<a class="pill" href="insights.html">Global insights</a>`;
+      topLinks.innerHTML += `<a class="pill" href="insights-horizon.html">Forecast horizon</a>`;
+      topLinks.innerHTML += `<a class="pill" href="insights-crops.html">Crop comparison</a>`;
+      topLinks.innerHTML += `<a class="pill" href="insights-sample-size.html">Training set size</a>`;
     }
     if (DATA.has_screening && DATA.screening_href) {
       topLinks.innerHTML += `<a class="pill" href="${DATA.screening_href}">Screening (all)</a>`;
     }
-    topLinks.innerHTML += `<span class="pill muted">${DATA.n_countries} countries published</span>`;
 
-    function hasHorizon(c, hz) {
-      if (hz === "all" || hz === "both") return Boolean(c.eos || c.mid || c.qtr || c.early);
-      return Boolean(c[hz]);
+    function hasDashboard(c) {
+      return Boolean(c && (c.eos || c.mid));
     }
 
     function fillForIso(mapIso) {
       const c = byMapIso.get(mapIso);
-      if (!c || !hasHorizon(c, horizon)) return "var(--land-missing)";
+      if (!hasDashboard(c)) return "var(--land-missing)";
       if (selectedCc === c.cc) return "var(--land-active)";
       return "var(--land-available)";
     }
@@ -187,16 +179,12 @@
         return;
       }
       const c = byCc.get(cc);
-      const earlyCls = c.early ? "" : " disabled";
       const eosCls = c.eos ? "" : " disabled";
       const midCls = c.mid ? "" : " disabled";
-      const qtrCls = c.qtr ? "" : " disabled";
       el.innerHTML = `
         <h3>${c.name}</h3>
         <div class="cc">${c.cc}</div>
-        <a class="dash-link${earlyCls}" href="${c.early || "#"}">Early-season walk-forward (~25% observed)</a>
         <a class="dash-link${midCls}" href="${c.mid || "#"}">Mid-season walk-forward</a>
-        <a class="dash-link${qtrCls}" href="${c.qtr || "#"}">Late-season walk-forward (~75% observed)</a>
         <a class="dash-link${eosCls}" href="${c.eos || "#"}">End-of-season walk-forward</a>`;
     }
 
@@ -244,33 +232,17 @@
         .attr("shape-rendering", "geometricPrecision")
         .attr("class", d => {
           const c = isoToCountry(d.properties.ISO_A2);
-          return c && hasHorizon(c, horizon) ? "country available" : "country";
+          return hasDashboard(c) ? "country available" : "country";
         })
         .attr("d", path)
         .attr("fill", d => fillForIso(d.properties.ISO_A2))
         .on("click", (event, d) => {
           const c = isoToCountry(d.properties.ISO_A2);
-          if (c && hasHorizon(c, horizon)) selectCountry(c.cc);
+          if (hasDashboard(c)) selectCountry(c.cc);
         });
     }).catch(err => {
       document.getElementById("map-wrap").innerHTML =
         `<p class="muted">Could not load map (${err}). Use the country links in the repository README or open insights.</p>`;
-    });
-
-    document.querySelectorAll(".toolbar button").forEach(btn => {
-      btn.addEventListener("click", () => {
-        document.querySelectorAll(".toolbar button").forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        horizon = btn.dataset.horizon;
-        selectedCc = null;
-        renderDetail(null);
-        d3.selectAll(".country")
-          .attr("class", d => {
-            const c = isoToCountry(d.properties.ISO_A2);
-            return c && hasHorizon(c, horizon) ? "country available" : "country";
-          })
-          .attr("fill", d => fillForIso(d.properties.ISO_A2));
-      });
     });
   </script>
 </body>
