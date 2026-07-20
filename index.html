@@ -18,6 +18,7 @@
       --land-available: #9ec5fe;
       --land-active: #0969da;
       --land-missing: #f0f0f0;
+      --findings-bg: #f0f6fc;
     }
     * { box-sizing: border-box; }
     body {
@@ -36,7 +37,7 @@
       flex-wrap: wrap;
       align-items: center;
       gap: 1rem 1.25rem;
-      margin-bottom: 1rem;
+      margin-bottom: 0.85rem;
       padding: 0.85rem 1rem;
       background: var(--card);
       border: 1px solid var(--border);
@@ -64,13 +65,72 @@
       text-transform: uppercase;
       color: var(--muted);
     }
-    .lead { margin: 0.35rem 0 0; color: var(--muted); max-width: 58rem; }
-    .intro {
-      margin: 0 0 1.15rem;
+    .tagline {
+      margin: 0.3rem 0 0;
+      font-size: 1.05rem;
       color: var(--text);
-      max-width: 58rem;
+      font-weight: 500;
     }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.65rem;
+      margin: 0 0 0.95rem;
+    }
+    @media (max-width: 720px) {
+      .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    .stat {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.7rem 0.85rem;
+      box-shadow: 0 1px 2px rgba(31, 35, 40, 0.04);
+    }
+    .stat .value {
+      font-size: 1.45rem;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .stat .label {
+      margin-top: 0.2rem;
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.3;
+    }
+    .intro {
+      margin: 0 0 0.85rem;
+      color: var(--text);
+      max-width: 52rem;
+      font-size: 0.98rem;
+    }
+    .intro p { margin: 0 0 0.55rem; }
+    .intro p:last-child { margin-bottom: 0; }
     .intro a { color: var(--accent); }
+    .findings {
+      margin: 0 0 1.1rem;
+      padding: 0.85rem 1rem;
+      background: var(--findings-bg);
+      border: 1px solid #cce0f5;
+      border-radius: 10px;
+      max-width: 52rem;
+    }
+    .findings h2 {
+      margin: 0 0 0.45rem;
+      font-size: 0.92rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #325a8c;
+    }
+    .findings ul {
+      margin: 0;
+      padding-left: 1.15rem;
+      color: var(--text);
+      font-size: 0.92rem;
+    }
+    .findings li { margin: 0.28rem 0; }
     .section { margin-bottom: 1.25rem; }
     .section-head {
       display: flex;
@@ -197,9 +257,25 @@
       width: 14px; height: 14px; border-radius: 3px; border: 1px solid var(--border);
       display: inline-block;
     }
+    .cite {
+      margin-top: 1.25rem;
+      padding: 0.85rem 1rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+    .cite strong { color: var(--text); }
+    .cite .cite-body {
+      margin: 0.4rem 0 0;
+      color: var(--text);
+      font-size: 0.9rem;
+    }
+    .cite a { color: var(--accent); }
     .site-footer {
-      margin-top: 1.5rem;
-      padding-top: 1rem;
+      margin-top: 1rem;
+      padding-top: 0.85rem;
       border-top: 1px solid var(--border);
       color: var(--muted);
       font-size: 0.86rem;
@@ -215,25 +291,46 @@
       </a>
       <div class="brand-copy">
         <p class="brand-kicker">AgML · Crop yield forecasting</p>
-        <h1>CY-Bench dashboards</h1>
-        <p class="lead">Explore country model results and cross-country summaries from the CY-Bench benchmark.</p>
+        <h1>CY-Bench dashboard</h1>
+        <p class="tagline">Benchmarking AI for global crop yield forecasting</p>
       </div>
     </header>
 
-    <p class="intro">
-      <strong>CY-Bench</strong> is a dataset and benchmark for subnational crop yield forecasting
-      (maize and wheat), comparing classical, process-based, and machine-learning models.
-      This site hosts interactive results: start with a country on the map, or browse global insights below.
-      More about the project on
-      <a href="https://www.agml.org/" target="_blank" rel="noopener noreferrer">agml.org</a>
-      and the
-      <a href="https://github.com/WUR-AI/AgML-CY-Bench/tree/KDD/cybench" target="_blank" rel="noopener noreferrer">KDD branch on GitHub</a>.
-    </p>
+    <div class="stats" id="landing-stats" aria-label="Benchmark scale" hidden></div>
+
+    <div class="intro">
+      <p>
+        Interactive results for <strong>Benchmarking the State of AI for Crop Yield Forecasting</strong>
+        on CY-Bench: a standardized comparison of statistical baselines, process-based crop models,
+        feature-engineered machine learning, tabular foundation models, and deep sequence models
+        across maize and wheat, evaluated on overall, spatial, temporal, and anomaly skill.
+      </p>
+      <p>
+        Open a country on the map for local results, or use the global insight pages below for
+        cross-country summaries.
+        <a href="https://github.com/WUR-AI/AgML-CY-Bench-Modeling" target="_blank" rel="noopener noreferrer">Modeling code</a>
+        ·
+        <a href="https://github.com/WUR-AI/AgML-CY-Bench" target="_blank" rel="noopener noreferrer">Dataset</a>
+        ·
+        <a href="https://essd.copernicus.org/articles/18/3997/2026/" target="_blank" rel="noopener noreferrer">ESSD paper</a>
+        ·
+        <a href="https://www.agml.org/" target="_blank" rel="noopener noreferrer">AgML</a>
+      </p>
+    </div>
+
+    <aside class="findings">
+      <h2>Key findings</h2>
+      <ul>
+        <li>Feature-engineered ML and tabular foundation models achieve the strongest overall skill in most countries.</li>
+        <li>Spatial prediction is substantially easier than temporal and anomaly prediction across modeling paradigms.</li>
+        <li>Process-based models show comparatively strong temporal skill despite lower overall accuracy; year-to-year anomalies remain hard.</li>
+      </ul>
+    </aside>
 
     <section class="section">
       <div class="section-head">
-        <h2>Country dashboards</h2>
-        <p>Click a blue country to open mid-season and end-of-season model results</p>
+        <h2>Explore by country</h2>
+        <p>Click a blue country for mid-season and end-of-season model results</p>
       </div>
       <div class="layout">
         <div class="card">
@@ -253,21 +350,33 @@
     <section class="section" id="insights-section" hidden>
       <div class="section-head">
         <h2>Global insights</h2>
-        <p>Cross-country summaries · not tied to a single dashboard country</p>
+        <p>Cross-country summaries · models, horizons, crops, and sample size</p>
       </div>
       <div class="nav-cards" id="top-links"></div>
       <div class="extra-links" id="extra-links"></div>
     </section>
 
+    <section class="cite">
+      <strong>Citation</strong>
+      <p class="cite-body">
+        If you use CY-Bench or results from this dashboard, please cite the dataset paper
+        (<a href="https://essd.copernicus.org/articles/18/3997/2026/" target="_blank" rel="noopener noreferrer">Kallenberg et&nbsp;al., ESSD 2026</a>)
+        and, for the AI model assessment,
+        Kallenberg et&nbsp;al. <em>Benchmarking the State of AI for Crop Yield Forecasting: A Global Assessment Across Modeling Paradigms</em>. KDD 2027.
+      </p>
+    </section>
+
     <footer class="site-footer">
       Part of <a href="https://www.agml.org/" target="_blank" rel="noopener noreferrer">AgML</a>
-      · CY-Bench code on
-      <a href="https://github.com/WUR-AI/AgML-CY-Bench/tree/KDD/cybench" target="_blank" rel="noopener noreferrer">WUR-AI/AgML-CY-Bench (KDD)</a>
+      · Modeling code:
+      <a href="https://github.com/WUR-AI/AgML-CY-Bench-Modeling" target="_blank" rel="noopener noreferrer">AgML-CY-Bench-Modeling</a>
+      · Dataset:
+      <a href="https://github.com/WUR-AI/AgML-CY-Bench" target="_blank" rel="noopener noreferrer">AgML-CY-Bench</a>
     </footer>
   </div>
 
   <script>
-    const DATA = {"countries": [{"cc": "AO", "map_cc": "AO", "name": "Angola", "eos": "ao_walk_forward_eos_v4/dashboard.html", "mid": "ao_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "AR", "map_cc": "AR", "name": "Argentina", "eos": "ar_walk_forward_eos_v4/dashboard.html", "mid": "ar_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "AU", "map_cc": "AU", "name": "Australia", "eos": "au_walk_forward_eos_v4/dashboard.html", "mid": "au_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "AT", "map_cc": "AT", "name": "Austria", "eos": "at_walk_forward_eos_v4/dashboard.html", "mid": "at_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "BE", "map_cc": "BE", "name": "Belgium", "eos": "be_walk_forward_eos_v4/dashboard.html", "mid": "be_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "BR", "map_cc": "BR", "name": "Brazil", "eos": "br_walk_forward_eos_v4/dashboard.html", "mid": "br_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "BG", "map_cc": "BG", "name": "Bulgaria", "eos": "bg_walk_forward_eos_v4/dashboard.html", "mid": "bg_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "BF", "map_cc": "BF", "name": "Burkina Faso", "eos": "bf_walk_forward_eos_v4/dashboard.html", "mid": "bf_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "TD", "map_cc": "TD", "name": "Chad", "eos": "td_walk_forward_eos_v4/dashboard.html", "mid": "td_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "CN", "map_cc": "CN", "name": "China", "eos": "cn_walk_forward_eos_v4/dashboard.html", "mid": "cn_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "HR", "map_cc": "HR", "name": "Croatia", "eos": "hr_walk_forward_eos_v4/dashboard.html", "mid": "hr_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "CZ", "map_cc": "CZ", "name": "Czechia", "eos": "cz_walk_forward_eos_v4/dashboard.html", "mid": "cz_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "DK", "map_cc": "DK", "name": "Denmark", "eos": "dk_walk_forward_eos_v4/dashboard.html", "mid": "dk_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "EE", "map_cc": "EE", "name": "Estonia", "eos": "ee_walk_forward_eos_v4/dashboard.html", "mid": "ee_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "ET", "map_cc": "ET", "name": "Ethiopia", "eos": "et_walk_forward_eos_v4/dashboard.html", "mid": "et_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "FI", "map_cc": "FI", "name": "Finland", "eos": "fi_walk_forward_eos_v4/dashboard.html", "mid": "fi_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "FR", "map_cc": "FR", "name": "France", "eos": "fr_walk_forward_eos_v4/dashboard.html", "mid": "fr_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "DE", "map_cc": "DE", "name": "Germany", "eos": "de_walk_forward_eos_v4/dashboard.html", "mid": "de_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "EL", "map_cc": "GR", "name": "Greece", "eos": "el_walk_forward_eos_v4/dashboard.html", "mid": "el_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "HU", "map_cc": "HU", "name": "Hungary", "eos": "hu_walk_forward_eos_v4/dashboard.html", "mid": "hu_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "IN", "map_cc": "IN", "name": "India", "eos": "in_walk_forward_eos_v4/dashboard.html", "mid": "in_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "IT", "map_cc": "IT", "name": "Italy", "eos": "it_walk_forward_eos_v4/dashboard.html", "mid": "it_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "LV", "map_cc": "LV", "name": "Latvia", "eos": "lv_walk_forward_eos_v4/dashboard.html", "mid": "lv_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "LS", "map_cc": "LS", "name": "Lesotho", "eos": "ls_walk_forward_eos_v4/dashboard.html", "mid": "ls_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "LT", "map_cc": "LT", "name": "Lithuania", "eos": "lt_walk_forward_eos_v4/dashboard.html", "mid": "lt_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "MG", "map_cc": "MG", "name": "Madagascar", "eos": "mg_walk_forward_eos_v4/dashboard.html", "mid": "mg_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "ML", "map_cc": "ML", "name": "Mali", "eos": "ml_walk_forward_eos_v4/dashboard.html", "mid": "ml_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "MZ", "map_cc": "MZ", "name": "Mozambique", "eos": "mz_walk_forward_eos_v4/dashboard.html", "mid": "mz_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "NL", "map_cc": "NL", "name": "Netherlands", "eos": "nl_walk_forward_eos_v4/dashboard.html", "mid": "nl_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "NE", "map_cc": "NE", "name": "Niger", "eos": "ne_walk_forward_eos_v4/dashboard.html", "mid": "ne_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "PL", "map_cc": "PL", "name": "Poland", "eos": "pl_walk_forward_eos_v4/dashboard.html", "mid": "pl_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "PT", "map_cc": "PT", "name": "Portugal", "eos": "pt_walk_forward_eos_v4/dashboard.html", "mid": "pt_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "RO", "map_cc": "RO", "name": "Romania", "eos": "ro_walk_forward_eos_v4/dashboard.html", "mid": "ro_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "SN", "map_cc": "SN", "name": "Senegal", "eos": "sn_walk_forward_eos_v4/dashboard.html", "mid": "sn_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "SK", "map_cc": "SK", "name": "Slovakia", "eos": "sk_walk_forward_eos_v4/dashboard.html", "mid": "sk_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "ZA", "map_cc": "ZA", "name": "South Africa", "eos": "za_walk_forward_eos_v4/dashboard.html", "mid": "za_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "ES", "map_cc": "ES", "name": "Spain", "eos": "es_walk_forward_eos_v4/dashboard.html", "mid": "es_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "SE", "map_cc": "SE", "name": "Sweden", "eos": "se_walk_forward_eos_v4/dashboard.html", "mid": "se_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "US", "map_cc": "US", "name": "United States", "eos": "us_walk_forward_eos_v4/dashboard.html", "mid": "us_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "ZM", "map_cc": "ZM", "name": "Zambia", "eos": "zm_walk_forward_eos_v4/dashboard.html", "mid": "zm_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}], "n_countries": 40, "has_insights": true, "has_screening": false, "screening_href": null, "geojson_href": "assets/world_countries.geojson"};
+    const DATA = {"countries": [{"cc": "AO", "map_cc": "AO", "name": "Angola", "eos": "ao_walk_forward_eos_v4/dashboard.html", "mid": "ao_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "AR", "map_cc": "AR", "name": "Argentina", "eos": "ar_walk_forward_eos_v4/dashboard.html", "mid": "ar_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "AU", "map_cc": "AU", "name": "Australia", "eos": "au_walk_forward_eos_v4/dashboard.html", "mid": "au_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "AT", "map_cc": "AT", "name": "Austria", "eos": "at_walk_forward_eos_v4/dashboard.html", "mid": "at_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "BE", "map_cc": "BE", "name": "Belgium", "eos": "be_walk_forward_eos_v4/dashboard.html", "mid": "be_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "BR", "map_cc": "BR", "name": "Brazil", "eos": "br_walk_forward_eos_v4/dashboard.html", "mid": "br_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "BG", "map_cc": "BG", "name": "Bulgaria", "eos": "bg_walk_forward_eos_v4/dashboard.html", "mid": "bg_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "BF", "map_cc": "BF", "name": "Burkina Faso", "eos": "bf_walk_forward_eos_v4/dashboard.html", "mid": "bf_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "TD", "map_cc": "TD", "name": "Chad", "eos": "td_walk_forward_eos_v4/dashboard.html", "mid": "td_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "CN", "map_cc": "CN", "name": "China", "eos": "cn_walk_forward_eos_v4/dashboard.html", "mid": "cn_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "HR", "map_cc": "HR", "name": "Croatia", "eos": "hr_walk_forward_eos_v4/dashboard.html", "mid": "hr_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "CZ", "map_cc": "CZ", "name": "Czechia", "eos": "cz_walk_forward_eos_v4/dashboard.html", "mid": "cz_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "DK", "map_cc": "DK", "name": "Denmark", "eos": "dk_walk_forward_eos_v4/dashboard.html", "mid": "dk_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "EE", "map_cc": "EE", "name": "Estonia", "eos": "ee_walk_forward_eos_v4/dashboard.html", "mid": "ee_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "ET", "map_cc": "ET", "name": "Ethiopia", "eos": "et_walk_forward_eos_v4/dashboard.html", "mid": "et_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "FI", "map_cc": "FI", "name": "Finland", "eos": "fi_walk_forward_eos_v4/dashboard.html", "mid": "fi_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "FR", "map_cc": "FR", "name": "France", "eos": "fr_walk_forward_eos_v4/dashboard.html", "mid": "fr_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "DE", "map_cc": "DE", "name": "Germany", "eos": "de_walk_forward_eos_v4/dashboard.html", "mid": "de_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "EL", "map_cc": "GR", "name": "Greece", "eos": "el_walk_forward_eos_v4/dashboard.html", "mid": "el_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "HU", "map_cc": "HU", "name": "Hungary", "eos": "hu_walk_forward_eos_v4/dashboard.html", "mid": "hu_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "IN", "map_cc": "IN", "name": "India", "eos": "in_walk_forward_eos_v4/dashboard.html", "mid": "in_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "IT", "map_cc": "IT", "name": "Italy", "eos": "it_walk_forward_eos_v4/dashboard.html", "mid": "it_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "LV", "map_cc": "LV", "name": "Latvia", "eos": "lv_walk_forward_eos_v4/dashboard.html", "mid": "lv_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "LS", "map_cc": "LS", "name": "Lesotho", "eos": "ls_walk_forward_eos_v4/dashboard.html", "mid": "ls_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "LT", "map_cc": "LT", "name": "Lithuania", "eos": "lt_walk_forward_eos_v4/dashboard.html", "mid": "lt_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "MG", "map_cc": "MG", "name": "Madagascar", "eos": "mg_walk_forward_eos_v4/dashboard.html", "mid": "mg_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "ML", "map_cc": "ML", "name": "Mali", "eos": "ml_walk_forward_eos_v4/dashboard.html", "mid": "ml_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "MZ", "map_cc": "MZ", "name": "Mozambique", "eos": "mz_walk_forward_eos_v4/dashboard.html", "mid": "mz_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "NL", "map_cc": "NL", "name": "Netherlands", "eos": "nl_walk_forward_eos_v4/dashboard.html", "mid": "nl_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "NE", "map_cc": "NE", "name": "Niger", "eos": "ne_walk_forward_eos_v4/dashboard.html", "mid": "ne_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "PL", "map_cc": "PL", "name": "Poland", "eos": "pl_walk_forward_eos_v4/dashboard.html", "mid": "pl_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "PT", "map_cc": "PT", "name": "Portugal", "eos": "pt_walk_forward_eos_v4/dashboard.html", "mid": "pt_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "RO", "map_cc": "RO", "name": "Romania", "eos": "ro_walk_forward_eos_v4/dashboard.html", "mid": "ro_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "SN", "map_cc": "SN", "name": "Senegal", "eos": "sn_walk_forward_eos_v4/dashboard.html", "mid": "sn_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "SK", "map_cc": "SK", "name": "Slovakia", "eos": "sk_walk_forward_eos_v4/dashboard.html", "mid": "sk_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "ZA", "map_cc": "ZA", "name": "South Africa", "eos": "za_walk_forward_eos_v4/dashboard.html", "mid": "za_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "ES", "map_cc": "ES", "name": "Spain", "eos": "es_walk_forward_eos_v4/dashboard.html", "mid": "es_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "SE", "map_cc": "SE", "name": "Sweden", "eos": "se_walk_forward_eos_v4/dashboard.html", "mid": "se_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "US", "map_cc": "US", "name": "United States", "eos": "us_walk_forward_eos_v4/dashboard.html", "mid": "us_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}, {"cc": "ZM", "map_cc": "ZM", "name": "Zambia", "eos": "zm_walk_forward_eos_v4/dashboard.html", "mid": "zm_walk_forward_mid_v4/dashboard.html", "qtr": null, "early": null}], "n_countries": 40, "stats": {"n_country_crop_datasets": 63, "n_maize_datasets": 36, "n_wheat_datasets": 27, "n_regions": 12089, "n_models": 19, "n_skill_dimensions": 4, "skill_dimension_labels": ["Overall", "Spatial", "Temporal", "Anomaly"]}, "has_insights": true, "has_screening": false, "screening_href": null, "geojson_href": "assets/world_countries.geojson"};
     const byCc = new Map(DATA.countries.map(c => [c.cc, c]));
     const byMapIso = new Map(DATA.countries.map(c => [c.map_cc || c.cc, c]));
     let selectedCc = null;
@@ -275,6 +384,52 @@
     const insightsSection = document.getElementById("insights-section");
     const topLinks = document.getElementById("top-links");
     const extraLinks = document.getElementById("extra-links");
+    const landingStats = document.getElementById("landing-stats");
+
+    function fmtCount(n) {
+      if (n == null || Number.isNaN(Number(n))) return null;
+      return Number(n).toLocaleString("en-US");
+    }
+
+    function renderLandingStats() {
+      const stats = DATA.stats || {};
+      const cropBits = [];
+      if (stats.n_maize_datasets != null) cropBits.push(`${fmtCount(stats.n_maize_datasets)} maize`);
+      if (stats.n_wheat_datasets != null) cropBits.push(`${fmtCount(stats.n_wheat_datasets)} wheat`);
+      const skillLabels = (stats.skill_dimension_labels || [])
+        .map(s => String(s).toLowerCase())
+        .join(" · ");
+
+      const cards = [
+        {
+          value: fmtCount(stats.n_country_crop_datasets),
+          label: "Country–crop datasets"
+            + (cropBits.length ? `<br>(${cropBits.join(" · ")})` : ""),
+        },
+        {
+          value: fmtCount(stats.n_regions),
+          label: "Administrative regions",
+        },
+        {
+          value: fmtCount(stats.n_models),
+          label: "Forecasting models",
+        },
+        {
+          value: fmtCount(stats.n_skill_dimensions),
+          label: "Skill dimensions"
+            + (skillLabels ? `<br>(${skillLabels})` : ""),
+        },
+      ].filter(card => card.value != null);
+
+      if (!cards.length || !landingStats) return;
+      landingStats.hidden = false;
+      landingStats.innerHTML = cards.map(card => `
+        <div class="stat">
+          <div class="value">${card.value}</div>
+          <div class="label">${card.label}</div>
+        </div>`).join("");
+    }
+    renderLandingStats();
 
     const INSIGHT_CARDS = [
       {
